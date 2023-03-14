@@ -1,5 +1,5 @@
 from typing import Union, List, Dict
-from src.insights.jobs import read
+from jobs import read
 
 
 def get_max_salary(path: str) -> int:
@@ -17,10 +17,12 @@ def get_max_salary(path: str) -> int:
     int
         The maximum salary paid out of all job opportunities
     """
-    return max(list(set(
+    response = list(set(
         [int(element['max_salary'])
             for element in read(path)
-            if element['max_salary']])))
+            if element['max_salary']]))
+
+    return max(response)
 
 
 def get_min_salary(path: str) -> int:
