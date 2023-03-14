@@ -1,4 +1,5 @@
 from typing import Union, List, Dict
+from src.insights.jobs import read
 
 
 def get_max_salary(path: str) -> int:
@@ -16,7 +17,10 @@ def get_max_salary(path: str) -> int:
     int
         The maximum salary paid out of all job opportunities
     """
-    raise NotImplementedError
+    return max(list(set(
+        [int(element['max_salary'])
+            for element in read(path)
+            if element['max_salary']])))
 
 
 def get_min_salary(path: str) -> int:
@@ -34,7 +38,10 @@ def get_min_salary(path: str) -> int:
     int
         The minimum salary paid out of all job opportunities
     """
-    raise NotImplementedError
+    return min(list(set(
+        [int(element['max_salary'])
+            for element in read(path)
+            if element['max_salary']])))
 
 
 def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
@@ -57,7 +64,7 @@ def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
     ValueError
         If `job["min_salary"]` or `job["max_salary"]` doesn't exists
         If `job["min_salary"]` or `job["max_salary"]` aren't valid integers
-        If `job["min_salary"]` is greather than `job["max_salary"]`
+        If `job["min_salary"]` is greater than `job["max_salary"]`
         If `salary` isn't a valid integer
     """
     raise NotImplementedError
