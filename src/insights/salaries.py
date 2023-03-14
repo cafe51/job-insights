@@ -9,7 +9,7 @@ def get_salaries(path: str) -> List[int]:
                     if element['max_salary'].isdigit()]
     min_salaries = [int(element['min_salary'])
                     for element in jobs
-                    if element['max_salary'].isdigit()]
+                    if element['min_salary'].isdigit()]
     return max_salaries + min_salaries
 
 
