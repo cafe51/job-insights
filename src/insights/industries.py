@@ -41,6 +41,9 @@ def filter_by_industry(jobs: List[Dict], industry: str) -> List[Dict]:
     if industry not in get_unique_industries('data/jobs.csv'):
         return []
 
-    job_list = [element for element in jobs if element['industry'] == industry]
+    job_list = [element for
+                element in jobs
+                if element['industry'] == industry
+                and bool(element['job_type'])]
 
     return job_list
