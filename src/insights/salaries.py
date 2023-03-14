@@ -1,4 +1,5 @@
 from typing import Union, List, Dict
+# from jobs import read
 from src.insights.jobs import read
 
 
@@ -40,6 +41,7 @@ def get_min_salary(path: str) -> int:
     ----------
     path : str
         Must be passed to `read`
+    # return int(job['min_salary']) <= int(salary) <= int(job['max_salary'])
 
     Returns
     -------
@@ -49,45 +51,31 @@ def get_min_salary(path: str) -> int:
     return min(get_salaries(path))
 
 
+def is_digit(value):
+    return str((value)).strip().replace('-', '').isdigit()
+
+
 def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
-    """Checks if a given salary is in the salary range of a given job
 
-    Parameters
-    ----------
-    job : dict
-        The job with `min_salary` and `max_salary` keys
-    salary : int
-        The salary to check if matches with salary range of the job
-
-    Returns
-    -------
-    bool
-        True if the salary is in the salary range of the job, False otherwise
-
-    Raises
-    ------
-    ValueError
-        If `job["min_salary"]` or `job["max_salary"]` doesn't exists
-        If `job["min_salary"]` or `job["max_salary"]` aren't valid integers
-        If `job["min_salary"]` is greater than `job["max_salary"]`
-        If `salary` isn't a valid integer
-    """
-    if (not bool(job["min_salary"]) or
-            not bool(job["max_salary"])):
+    if ("min_salary" not in job or "max_salary" not in job):
         raise ValueError()
 
-    if (not str(job["min_salary"]).strip().isnumeric() or
-            not str(job["max_salary"]).strip().isnumeric()):
+    if (not is_digit(job["min_salary"]) or not is_digit(job["max_salary"])):
         raise ValueError()
 
     if int(job["min_salary"]) > int(job["max_salary"]):
         raise ValueError()
 
-    if (not str(salary).strip().isnumeric()):
+    if (
+            not isinstance(salary, str)
+            and not isinstance(salary, int)
+            and not is_digit(salary)):
         raise ValueError()
 
-    response = int(job['min_salary']) <= int(salary) <= int(job['max_salary'])
-    return response
+    # if (isinstance(salary, str) and not is_digit(salary)):
+    #     raise ValueError()
+
+    return int(job['min_salary']) <= int(salary) <= int(job['max_salary'])
 
 
 def filter_by_salary_range(
@@ -109,3 +97,23 @@ def filter_by_salary_range(
         Jobs whose salary range contains `salary`
     """
     raise NotImplementedError
+
+# jobs = [
+#     {"max_salary": 10000, "min_salary": 200},
+#     {"max_salary": 1500, "min_salary": 0},
+# ]
+
+# [False, False, False, True, True, False, False],
+# [True, True, True, True, False, False, False],
+# invalid_types = [None, "", "aloha", [], {}, lambda: 1]
+
+# salaries = [0, 1, 5, 1000, 2000, -1, -2]
+
+
+# for salarie in salaries:
+#     print(
+#         matches_salary_range({"max_salary": 1500, "min_salary": 0}, salarie
+#                              ))
+
+
+# print(matches_salary_range({"max_salary": "1000"}, 10))
