@@ -1,4 +1,5 @@
 from typing import Union, List, Dict
+from jobs import read
 
 
 def get_max_salary(path: str) -> int:
@@ -16,7 +17,10 @@ def get_max_salary(path: str) -> int:
     int
         The maximum salary paid out of all job opportunities
     """
-    raise NotImplementedError
+    return max(list(set(
+        [int(element['max_salary'])
+            for element in read(path)
+            if element['max_salary']])))
 
 
 def get_min_salary(path: str) -> int:
@@ -82,3 +86,5 @@ def filter_by_salary_range(
         Jobs whose salary range contains `salary`
     """
     raise NotImplementedError
+
+print(get_max_salary('data/jobs.csv'))
