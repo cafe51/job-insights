@@ -18,7 +18,9 @@ def get_unique_industries(path: str) -> List[str]:
     list
         List of unique industries
     """
-    return list(set([element['industry'] for element in read(path)]))
+    return list(set([element['industry']
+                for element in read(path)
+                if element['industry']]))
 
 
 def filter_by_industry(jobs: List[Dict], industry: str) -> List[Dict]:
