@@ -5,10 +5,12 @@ from src.insights.jobs import read
 def get_salaries(path: str) -> List[int]:
     jobs = read(path)
     max_salaries = [int(element['max_salary'])
-                    for element in jobs]
+                    for element in jobs
+                    if element['max_salary'].isdigit()]
     min_salaries = [int(element['min_salary'])
-                    for element in jobs]
-    return set(max_salaries + min_salaries)
+                    for element in jobs
+                    if element['max_salary'].isdigit()]
+    return max_salaries + min_salaries
 
 
 def get_max_salary(path: str) -> int:
