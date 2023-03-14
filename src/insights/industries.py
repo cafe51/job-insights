@@ -20,7 +20,7 @@ def get_unique_industries(path: str) -> List[str]:
     """
     return list(set([element['industry']
                 for element in read(path)
-                if element['industry']]))
+                if bool(element['industry'])]))
 
 
 def filter_by_industry(jobs: List[Dict], industry: str) -> List[Dict]:
@@ -43,7 +43,6 @@ def filter_by_industry(jobs: List[Dict], industry: str) -> List[Dict]:
 
     job_list = [element for
                 element in jobs
-                if element['industry'] == industry
-                and bool(element['job_type'])]
+                if element['industry'] == industry]
 
     return job_list
