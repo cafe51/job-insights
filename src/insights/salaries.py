@@ -87,4 +87,3 @@ def filter_by_salary_range(
     """
     raise NotImplementedError
 
-print(get_max_salary('data/jobs.csv'))
