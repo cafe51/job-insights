@@ -4,11 +4,11 @@ from src.insights.jobs import read
 
 def get_salaries(path: str) -> list[int]:
     jobs = read(path)
-    salaries = [int(element['max_salary'])
-                for element in jobs
-                if element['max_salary']]
-
-    return salaries
+    max_salaries = [int(element['max_salary'])
+                    for element in jobs]
+    min_salaries = [int(element['min_salary'])
+                    for element in jobs]
+    return set(max_salaries + min_salaries)
 
 
 def get_max_salary(path: str) -> int:
@@ -44,7 +44,7 @@ def get_min_salary(path: str) -> int:
     int
         The minimum salary paid out of all job opportunities
     """
-    raise NotImplementedError
+    return min(get_salaries(path))
 
 
 def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
