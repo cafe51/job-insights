@@ -56,3 +56,9 @@ def filter_by_job_type(jobs: List[Dict], job_type: str) -> List[Dict]:
     list
         List of jobs with provided job_type
     """
+    if job_type not in get_unique_job_types('data/jobs.csv'):
+        return []
+
+    job_list = [element for element in jobs if element['job_type'] == job_type]
+
+    return job_list[0]
