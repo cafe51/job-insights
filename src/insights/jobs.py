@@ -61,4 +61,4 @@ def filter_by_job_type(jobs: List[Dict], job_type: str) -> List[Dict]:
 
     job_list = [element for element in jobs if element['job_type'] == job_type]
 
-    return job_list[0]
+    return job_list

@@ -37,4 +37,10 @@ def filter_by_industry(jobs: List[Dict], industry: str) -> List[Dict]:
     list
         List of jobs with provided industry
     """
-    raise NotImplementedError
+    if industry not in get_unique_industries('data/jobs.csv'):
+        return []
+
+    industry_list = [element
+                     for element in jobs if element['industry'] == industry]
+
+    return industry_list
