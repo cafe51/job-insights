@@ -1,5 +1,6 @@
 from typing import List, Dict
-from src.insights.jobs import read
+# from src.insights.jobs import read
+from jobs import read
 
 
 def get_unique_industries(path: str) -> List[str]:
@@ -40,7 +41,6 @@ def filter_by_industry(jobs: List[Dict], industry: str) -> List[Dict]:
     if industry not in get_unique_industries('data/jobs.csv'):
         return []
 
-    industry_list = [element
-                     for element in jobs if element['industry'] == industry]
+    job_list = [element for element in jobs if element['industry'] == industry]
 
-    return industry_list
+    return job_list
