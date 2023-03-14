@@ -3,8 +3,9 @@ from src.insights.jobs import read
 
 
 def get_salaries(path: str) -> list[int]:
+    jobs = read(path)
     salaries = [int(element['max_salary'])
-                for element in read(path)
+                for element in jobs
                 if element['max_salary']]
 
     return salaries
