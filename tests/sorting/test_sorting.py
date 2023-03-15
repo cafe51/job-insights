@@ -10,5 +10,3 @@ def test_sort_by_criteria():
     for index in range(len(criteria)):
         sort_by(jobs, criteria[index])
         assert jobs[0][criteria[index]] == results[index]
-
-
